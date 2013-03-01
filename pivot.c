@@ -34,7 +34,7 @@ struct _XRR {
 };
 
 struct _options {
-	unsigned int verbose:1;
+	unsigned int verbose:1; //currently not used
 	unsigned int force:1;
 };
 
@@ -54,7 +54,7 @@ void help() {
 	printf("  default: left, normal\n");
 	printf("\n");
 	printf("examples:\n");
-	printf("  pivot -d :1 -v right\n");
+	printf("  pivot -d :1 right\n");
 	printf("  pivot left normal\n");
 	printf("\n");
 }
@@ -66,7 +66,6 @@ int main(int argc, char **argv) {
 	Rotation rotations = 0;
 	int i;
 	options opts;
-	opts.verbose = 0;
 	opts.force   = 0;
 	int r_opts  = 2;
 
@@ -78,10 +77,6 @@ int main(int argc, char **argv) {
 		}
 		if ( (!strcmp(argv[i],"-d") || !strcmp(argv[i],"--display")) && (++i < argc)) {
 			disp_name = argv[i];
-			continue;
-		}
-		if ( !strcmp(argv[i],"-v") || !strcmp(argv[i],"--verbose") ) {
-			opts.verbose = 1;
 			continue;
 		}
 		if ( !strcmp(argv[i],"-f") || !strcmp(argv[i],"--force") ) {
