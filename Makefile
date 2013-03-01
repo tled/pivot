@@ -1,13 +1,17 @@
 
+O = -Wall -O2 #-g -DDEBUG
+LIBS = -lXrandr -lX11
+
 .PHONY: all clean debug
 
 all: pivot
 
-pivot: pivot.c
-	gcc -Wall -O2 -lXrandr -o pivot pivot.c
+pivot.o: pivot.c
+	gcc ${O} -c pivot.c
 
-debug:
-	gcc -Wall -DDEBUG -g -lXrandr -o pivot pivot.c
+pivot: pivot.o
+	gcc -o pivot pivot.o ${LIBS}
 
 clean:
 	rm -f pivot
+	rm -f *.o
