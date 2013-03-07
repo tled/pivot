@@ -117,8 +117,14 @@ int main(int argc, char **argv) {
 	//switching rotation
 	xrr.rotation ^= rotations;
 
-	return XRRSetScreenConfig(xhead.display,xrr.screen_config,xhead.root,
-							  xrr.size, xrr.rotation,CurrentTime);
+	if( !XRRSetScreenConfig(xhead.display,xrr.screen_config,xhead.root,
+							  xrr.size, xrr.rotation,CurrentTime)
+		) return 0;
+	else {
+		fprintf(stderr,"Failure setting screen rotation\n");
+		return 2;
+	}
+	
 
 }
 
